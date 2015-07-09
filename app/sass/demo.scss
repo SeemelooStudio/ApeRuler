@@ -1,0 +1,211 @@
+@import "settings/settings";
+@import "settings/mixins";
+
+$background-color:$black;
+$text-color:$white;
+$pixels-per-mm:6px;
+html,body {
+	background:$background-color;
+	color:$text-color;
+}
+html,body,#mainWrapper {
+	width:100%;
+	height:100%;
+	overflow:hidden;
+}
+#welcomeWrapper {
+	@include centerAndOffset($pixels-per-mm*50,$pixels-per-mm*80);
+}
+#device {
+	@include position(absolute,0 null null 0);
+	@include size($pixels-per-mm*30+2 $pixels-per-mm*80+2);
+	border-radius:2mm;
+	border:1px solid $border-color;
+	
+}
+#side-btns {
+	@include position(absolute,0 0 null null);
+	@include size($pixels-per-mm*18 $pixels-per-mm*80);
+}
+#screen {
+	@include size($pixels-per-mm*20 $pixels-per-mm*40);
+	@include position(absolute,$pixels-per-mm*4.5 null null $pixels-per-mm*5);
+	overflow:hidden;
+
+}
+#measure {
+	@include centerAndOffset($pixels-per-mm*12+2,$pixels-per-mm*12+2, 0, $pixels-per-mm*25);
+	border-radius:100%;
+	border:1px solid $border-color;
+	text-align:center;
+	line-height:$pixels-per-mm*12;
+}
+.digital {
+	font-family: 'digital-7regular';
+}
+.line {
+	position:relative;
+}
+.unit {
+	font-size:10px;
+}
+#min,#max,#angel{
+	font-size:5px;
+	position:absolute;
+}
+#min,#max {
+	width:6px;
+	left:-6px;
+	line-height:6px;
+	top:0;
+}
+#angel {
+	right:10px;
+	line-height:6px;
+	top:-8px;
+}
+#result-1-number,#result-2-number,#result-3-number {
+	font-size:$pixels-per-mm*5.5;
+	
+}
+#result-4-number {
+	font-size:$pixels-per-mm*7;
+}
+#result-line-1,#result-line-2,#result-line-3,#result-line-4 {
+	@include position(absolute);
+	right:0;
+}
+#base {
+	@include position(absolute,$pixels-per-mm*9 null null 0);
+}
+#deviceIcon {
+	font-size:$pixels-per-mm*6;
+	position:relative;
+	left:-$pixels-per-mm*1;
+}
+#result-line-1 {
+	top:$pixels-per-mm*8;
+}
+#result-line-2 {
+	top:$pixels-per-mm*12.5;
+}
+#result-line-3 {
+	top:$pixels-per-mm*17;
+}
+#result-line-4 {
+	top:$pixels-per-mm*22;
+}
+.sideBtn {
+	@include size($pixels-per-mm*8);
+	border-radius:100%;
+	border:1px solid $border-color;
+	margin:0 auto $pixels-per-mm*2;
+	text-align:center;
+	line-height:$pixels-per-mm*8-2;
+}
+.sideBtn:active,#measure:active {
+	background-color:darken($red,20%);
+}
+#screenCover {
+	@include position(absolute,0 null null 0);
+	@include size(100% $pixels-per-mm*49);
+	border-bottom:1px solid $border-color;
+}
+
+#laser,#bluetooth,#battery {
+	@include size($pixels-per-mm*5.5+2);
+	border-radius:100%;
+	border:1px solid $border-color;
+	@include position(absolute);
+	top:0;
+	line-height:$pixels-per-mm*5.5;
+	text-align:center;
+	.icon {
+		font-size: $pixels-per-mm*4;
+		line-height:$pixels-per-mm*5.5;
+	}
+}
+#laser {
+	left:0;
+}
+#bluetooth {
+	left:50%;
+	margin-left:-$pixels-per-mm*2.75-1;
+}
+#battery {
+	right:0;
+}
+
+
+
+#history,#error {
+	@include position(absolute,null null 0 null);
+	@include size($pixels-per-mm*10 $pixels-per-mm*3.33333);
+	text-align:center;
+}
+#history {
+	left:0;
+}
+#error {
+	right:0;
+	width:$pixels-per-mm*6.666667;
+}
+#history-icon,#error-icon,#history-name,#error-name,#history-count {
+	float:left;
+	display: inline-block;
+	width:$pixels-per-mm*3.33333;
+}
+#history-icon,#error-icon{
+	font-size:$pixels-per-mm*3.33333;
+}
+#history-name,#error-name {
+	font-size:$pixels-per-mm*3/2;
+	line-height:$pixels-per-mm*3.33333/2;
+	position:relative;
+	top:1px;
+}
+#history-count {
+	font-size:$pixels-per-mm*4;
+	text-align:right;
+}
+
+#type {
+	@include position(absolute, $pixels-per-mm*29 null null 0);
+	padding-left:$pixels-per-mm*6.66667;
+}
+#type-cubic .icon{
+	@include position(absolute,0 null null 0);
+	@include size($pixels-per-mm*6.66667);
+	font-size:$pixels-per-mm*6;
+	text-align:left;
+}
+
+#type-name {
+	font-size:$pixels-per-mm*1.5;
+	line-height:$pixels-per-mm*2.22222;
+}
+
+#loading {
+	@include position(absolute, $pixels-per-mm*29 null null $pixels-per-mm*10.5);
+	@include size($pixels-per-mm*4);
+	text-align:center;
+	.icon {
+		@include position(absolute,0 null null 0);
+		font-size:$pixels-per-mm*4;
+	}
+}
+#triangle {
+	@include position(absolute, $pixels-per-mm*29 0 null null);
+	@include size($pixels-per-mm*6.66667);
+	.icon {
+		@include position(absolute,0 null null 0);
+		font-size:$pixels-per-mm*6;
+	}
+}
+
+.sup {
+	font-size:$pixels-per-mm*2;
+	position:relative;
+	bottom:$pixels-per-mm*0.5;
+
+}
