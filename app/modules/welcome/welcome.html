@@ -1,39 +1,56 @@
 ﻿<div id="device">
     <div id="screenCover"></div>
-    <div id="screen">
-        <div id="laser">
+    <div id="screen" class="triangel-state-1">
+        <div id="laser" class="laser-on">
             <i id="laserIcon" class="icon icon-laser">
 			</i>
         </div>
-        <div id="bluetooth">
+        <div id="bluetooth" class="bluetooth-off">
             <i id="bluetoothIcon" class="icon icon-bluetooth">
 			</i>
         </div>
         <div id="battery">
-            <i id="bluetoothIcon" class="icon icon-battery-empty">
+            <i id="batteryIcon" class="icon icon-battery-empty">
 			</i>
+			<div id="battery-degrees">
+			<div id="battery-1" class="battery-degree"></div>
+			<div id="battery-2" class="battery-degree"></div>
+			<div id="battery-3" class="battery-degree"></div>
+			<div id="battery-4" class="battery-degree"></div>
+			</div>
         </div>
-        <div id="base">
+        <div id="base" class="base-bottom">
             <i id="deviceIcon" class="icon icon-device">
 			</i>
+			<i id="base-1" class="icon icon-base-1">
+			</i>
+			<i id="base-2" class="icon icon-base-2">
+			</i>
+			<i id="base-3" class="icon icon-base-3">
+			</i>
+			<div id="base-top">起点</div>
+			<div id="base-bottom">起点</div>
         </div>
         <div id="result-line-1" class="line">
             <div id="min">最
                 <br>小</div>
             <div id="angel">仰角</div>
-            <span id="result-1-number" class="digital">00000</span><span id="result-1-unit" class="unit">m</span><span id="result-1-sup" class="digital sup">8</span>
+            <div id="degree"></div>
+            <span id="result-1-number" class="digital">0.0.0.0.0</span><span id="result-1-unit" class="unit">m</span><span id="result-1-sup" class="digital sup">8</span>
         </div>
         <div id="result-line-2" class="line">
             <div id="max">最
                 <br>大</div>
-            <span id="result-2-number" class="digital">00000</span><span id="result-2-unit" class="unit">m</span><span id="result-2-sup" class="digital sup">8</span>
+            <span id="result-2-number" class="digital">0.0.0.0.0</span><span id="result-2-unit" class="unit">m</span><span id="result-2-sup" class="digital sup">8</span>
         </div>
         <div id="result-line-3" class="line">
-            <span id="result-3-number" class="digital">00000</span><span id="result-3-unit" class="unit">m</span><span id="result-3-sup" class="digital sup">8</span>
+        	<div id="operator"><i id="oprator-plus" class="icon icon-plus-2"></i><i id="oprator-minus" class="icon icon-minus-2"></i></div>
+            <span id="result-3-number" class="digital">0.0.0.0.0</span><span id="result-3-unit" class="unit">m</span><span id="result-3-sup" class="digital sup">8</span>
         </div>
         <div id="result-line-4" class="line">
-            <div id="result-4-number" class="digital">00000</div>
-            <div><span id="result-4-unit" class="unit">m</span><span id="result-4-sup" class="digital sup">8</span></div>
+            <div id="result-4-number" class="digital">0.0.0.0.0</div>
+            <div id="negative-sign"><i class="icon icon-minus-2"></i></div>
+            <div id="result-4-meta"><span id="result-4-unit" class="unit">m</span><span id="result-4-sup" class="digital sup">8</span></div>
         </div>
         <div id="type">
             <div id="type-cubic">
@@ -47,7 +64,7 @@
                 <div id="type-volumn">体积</div>
             </div>
         </div>
-        <div id="length"></div>
+        <div id="length"><span id="length-text">长度</span><i id="iconLength" class="icon icon-length"></i></div>
         <div id="loading">
             <i class="icon icon-loading-1"></i>
             <i class="icon icon-loading-2"></i>

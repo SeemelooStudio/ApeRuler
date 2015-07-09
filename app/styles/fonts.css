@@ -36,6 +36,27 @@
 
 }
 
+.icon-plus-2:before {
+	content: "\e619";
+}
+.icon-minus-2:before {
+	content: "\e61a";
+}
+.icon-length:before {
+	content: "\e605";
+}
+.icon-base-1:before {
+	content: "\e615";
+}
+.icon-base-2:before {
+	content: "\e616";
+}
+.icon-base-3:before {
+	content: "\e617";
+}
+.icon-device:before {
+	content: "\e618";
+}
 .icon-cubic-1:before {
 	content: "\e609";
 }
@@ -77,9 +98,6 @@
 }
 .icon-warning:before {
 	content: "\e604";
-}
-.icon-device:before {
-	content: "\e605";
 }
 .icon-bluetooth:before {
 	content: "\e606";

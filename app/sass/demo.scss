@@ -47,41 +47,52 @@ html,body,#mainWrapper {
 	position:relative;
 }
 .unit {
-	font-size:10px;
+	font-size:$pixels-per-mm*2.5;
 }
 #min,#max,#angel{
-	font-size:5px;
+	font-size:6px;
 	position:absolute;
 }
 #min,#max {
 	width:6px;
 	left:-6px;
 	line-height:6px;
-	top:0;
+	top:1px;
 }
 #angel {
-	right:10px;
+	right:18px;
 	line-height:6px;
 	top:-8px;
 }
+#degree {
+	@include position(absolute,0 $pixels-per-mm*1.5 null null);
+	@include size($pixels-per-mm);
+	border-radius:100%;
+	border:1px solid $text-color;
+}
+
 #result-1-number,#result-2-number,#result-3-number {
-	font-size:$pixels-per-mm*5.5;
-	
+	font-size:$pixels-per-mm*5;
+	letter-spacing:-2px;
+	padding-right:2px;
+	width:$pixels-per-mm*15.125;
 }
 #result-4-number {
 	font-size:$pixels-per-mm*7;
+	letter-spacing:-2px;
+	width:$pixels-per-mm*18.125;
 }
 #result-line-1,#result-line-2,#result-line-3,#result-line-4 {
 	@include position(absolute);
 	right:0;
 }
 #base {
-	@include position(absolute,$pixels-per-mm*9 null null 0);
-}
-#deviceIcon {
-	font-size:$pixels-per-mm*6;
-	position:relative;
-	left:-$pixels-per-mm*1;
+	@include position(absolute,$pixels-per-mm*7 null null 0);
+	@include size($pixels-per-mm*6);
+	.icon {
+		@include position(absolute,0 null null 0);
+		font-size:$pixels-per-mm*6;
+	}
 }
 #result-line-1 {
 	top:$pixels-per-mm*8;
@@ -94,6 +105,10 @@ html,body,#mainWrapper {
 }
 #result-line-4 {
 	top:$pixels-per-mm*22;
+}
+#result-4-meta {
+	text-align:right;
+	line-height:$pixels-per-mm*3;
 }
 .sideBtn {
 	@include size($pixels-per-mm*8);
@@ -136,7 +151,14 @@ html,body,#mainWrapper {
 	right:0;
 }
 
-
+#battery-degrees {
+	@include centerAndOffset($pixels-per-mm*1.5-2,$pixels-per-mm*1.6+2);
+}
+.battery-degree {
+	@include size(100% 25%);
+	margin-bottom:1px;
+	background:$text-color;
+}
 
 #history,#error {
 	@include position(absolute,null null 0 null);
@@ -180,11 +202,17 @@ html,body,#mainWrapper {
 	text-align:left;
 }
 
-#type-name {
+#type-name,#length-text {
 	font-size:$pixels-per-mm*1.5;
 	line-height:$pixels-per-mm*2.22222;
 }
-
+#length {
+	@include position(absolute, $pixels-per-mm*32 null null  $pixels-per-mm*6.7);
+}
+#length-text {
+	display:inline-block;
+	padding-right:$pixels-per-mm;
+}
 #loading {
 	@include position(absolute, $pixels-per-mm*29 null null $pixels-per-mm*10.5);
 	@include size($pixels-per-mm*4);
@@ -198,14 +226,232 @@ html,body,#mainWrapper {
 	@include position(absolute, $pixels-per-mm*29 0 null null);
 	@include size($pixels-per-mm*6.66667);
 	.icon {
-		@include position(absolute,0 null null 0);
+		@include position(absolute,0 0 null null);
 		font-size:$pixels-per-mm*6;
 	}
 }
 
 .sup {
-	font-size:$pixels-per-mm*2;
+	font-size:$pixels-per-mm*1.2;
 	position:relative;
 	bottom:$pixels-per-mm*0.5;
+}
+#operator {
+	@include position(absolute, null null 12px 0-$pixels-per-mm*2);
+	font-size:$pixels-per-mm*2;
+	@include size($pixels-per-mm*2);
+	.icon {
+		@include position(absolute,0 null null 0);
+	}
+}
+#base-top,#base-bottom {
+	@include position(absolute);
+	left:7px;
+	font-size:6px;
+	line-height:6px;
+}
+#base-top {
+	top:0;
+}
 
+#base-bottom {
+	bottom:-8px;
+}
+#negative-sign {
+	@include position(absolute, 6px null null 0-$pixels-per-mm*2);
+	font-size:$pixels-per-mm*2;
+	@include size($pixels-per-mm*2);
+	.icon {
+		@include position(absolute,0 null null 0);
+	}
+}
+
+
+
+@mixin show {
+	visibility:visible;
+}
+@mixin hide {
+	visibility:hidden;
+}
+
+@include keyframes(flash){
+	0% {@include show;}
+	50% {@include show;}
+	50% {@include hide;}
+	100%{@include hide;}
+}
+@include keyframes(battery){
+	0% {@include show;}
+	25% {@include show;}
+	25% {@include hide;}
+	100%{@include hide;}
+}
+@include keyframes(battery2){
+	0% {@include show;}
+	50% {@include show;}
+	50% {@include hide;}
+	100%{@include hide;}
+}
+@include keyframes(battery3){
+	0% {@include show;}
+	75% {@include show;}
+	75% {@include hide;}
+	100%{@include hide;}
+}
+@include keyframes(battery4){
+	
+}
+.flash {@include animation(flash 1s infinite);}
+
+/***** STATES ********/
+.laser-on {
+	.icon{@include animation(flash 1s infinite);}
+}
+.laser-off {
+	@include hide;
+}
+.bluetooth-on {
+
+}
+.bluetooth-off {
+	@include hide;
+}
+.bluetooth-pairing {
+	.icon{@include animation(flash 1s infinite);}
+}
+.battery-on {
+
+}
+.battery-charging {
+	#battery-1 {
+		@include animation(battery 2s infinite reverse);
+	}
+	#battery-2 {
+		@include animation(battery2 2s infinite reverse);
+	}
+	#battery-3 {
+		@include animation(battery3 2s infinite reverse);
+	}
+	#battery-4 {
+		@include animation(battery4 2s infinite reverse);
+	}
+}
+.base-top {
+	#base-1 {@include hide;}
+	#base-bottom {@include hide;}
+}
+.base-bottom {
+	#base-3 {@include hide;}
+	#base-top {@include hide;}
+}
+
+@mixin history-state-common {
+	#error {@include hide;}
+	#base {@include hide;}
+	#max,#min {@include hide;}
+	#loading{@include hide;}
+}
+.history-state-1 {
+	@include history-state-common;
+}
+
+
+
+@mixin length-state-common {
+	#error,#history {@include hide;}
+	#max,#min {@include hide;}
+	#loading{@include hide;}
+	#degree,#angel{@include hide;}
+	#operator{@include hide;}
+	.sup {@include hide;}
+	#type,#triangle {@include hide;}
+	#negative-sign{@include hide;}
+}
+.length-state-1 {
+	@include length-state-common;
+	#result-line-1,#result-line-2,#result-line-3 {@include hide;}
+}
+.length-state-2 {
+	@include length-state-common;
+	#result-line-1,#result-line-2{@include hide;}
+}
+.length-state-3 {
+	@include length-state-common;
+	#result-line-1{@include hide;}
+}
+.length-state-4 {
+	@include length-state-common;
+}
+
+
+@mixin area-state-common {
+	#error,#history {@include hide;}
+	#max,#min {@include hide;}
+	#loading{@include hide;}
+	#degree,#angel{@include hide;}
+	#operator{@include hide;}
+	.sup {@include hide;}
+	#length,#triangle {@include hide;}
+	#negative-sign{@include hide;}
+	#result-line-1{@include hide;}
+	#type-volumn{@include hide;}
+	#result-4-sup{@include show;}
+}
+.area-state-1 {
+	@include area-state-common;
+}
+.area-state-2 {
+	@include area-state-common;
+}
+.area-state-3 {
+	@include area-state-common;
+}
+
+
+@mixin volumn-state-common {
+	#error,#history {@include hide;}
+	#max,#min {@include hide;}
+	#loading{@include hide;}
+	#degree,#angel{@include hide;}
+	#operator{@include hide;}
+	.sup {@include hide;}
+	#length,#triangle {@include hide;}
+	#negative-sign{@include hide;}
+	#type-area{@include hide;}
+	#result-4-sup{@include show;}
+}
+.volumn-state-1 {
+	@include volumn-state-common;
+	.icon-cubic-3 {@include animation(flash 1s infinite);}
+}
+.volumn-state-2 {
+	@include volumn-state-common;
+	.icon-cubic-4 {@include animation(flash 1s infinite);}
+}
+.volumn-state-3 {
+	@include volumn-state-common;
+	.icon-cubic-2 {@include animation(flash 1s infinite);}
+}
+.volumn-state-4 {
+	@include volumn-state-common;
+}
+
+@mixin triangel-state-common {
+	#error,#history {@include hide;}
+	#max,#min {@include hide;}
+	#loading{@include hide;}
+	#operator{@include hide;}
+	.sup {@include hide;}
+	#length,#type {@include hide;}
+	#negative-sign{@include hide;}
+	#result-4-sup{@include show;}
+	#result-1-unit {@include hide;}
+}
+.triangel-state-1 {
+	@include triangel-state-common;
+	.icon-triangel-2 {@include animation(flash 1s infinite);}
+}
+.triangel-state-2 {
+	@include triangel-state-common;
 }

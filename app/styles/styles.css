@@ -940,28 +940,42 @@ html, body, #mainWrapper {
   position: relative; }
 
 .unit {
-  font-size: 10px; }
+  font-size: 15px; }
 
 #min, #max, #angel {
-  font-size: 5px;
+  font-size: 6px;
   position: absolute; }
 
 #min, #max {
   width: 6px;
   left: -6px;
   line-height: 6px;
-  top: 0; }
+  top: 1px; }
 
 #angel {
-  right: 10px;
+  right: 18px;
   line-height: 6px;
   top: -8px; }
 
+#degree {
+  position: absolute;
+  top: 0;
+  right: 9px;
+  height: 6px;
+  width: 6px;
+  border-radius: 100%;
+  border: 1px solid #FFF; }
+
 #result-1-number, #result-2-number, #result-3-number {
-  font-size: 33px; }
+  font-size: 30px;
+  letter-spacing: -2px;
+  padding-right: 2px;
+  width: 90.75px; }
 
 #result-4-number {
-  font-size: 42px; }
+  font-size: 42px;
+  letter-spacing: -2px;
+  width: 108.75px; }
 
 #result-line-1, #result-line-2, #result-line-3, #result-line-4 {
   position: absolute;
@@ -969,13 +983,15 @@ html, body, #mainWrapper {
 
 #base {
   position: absolute;
-  top: 54px;
-  left: 0; }
-
-#deviceIcon {
-  font-size: 36px;
-  position: relative;
-  left: -6px; }
+  top: 42px;
+  left: 0;
+  height: 36px;
+  width: 36px; }
+  #base .icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    font-size: 36px; }
 
 #result-line-1 {
   top: 48px; }
@@ -988,6 +1004,10 @@ html, body, #mainWrapper {
 
 #result-line-4 {
   top: 132px; }
+
+#result-4-meta {
+  text-align: right;
+  line-height: 18px; }
 
 .sideBtn {
   height: 48px;
@@ -1031,6 +1051,21 @@ html, body, #mainWrapper {
 
 #battery {
   right: 0; }
+
+#battery-degrees {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 11.6px;
+  width: 7px;
+  margin-top: -5.8px;
+  margin-left: -3.5px; }
+
+.battery-degree {
+  height: 25%;
+  width: 100%;
+  margin-bottom: 1px;
+  background: #FFF; }
 
 #history, #error {
   position: absolute;
@@ -1079,9 +1114,18 @@ html, body, #mainWrapper {
   font-size: 36px;
   text-align: left; }
 
-#type-name {
+#type-name, #length-text {
   font-size: 9px;
   line-height: 13.33332px; }
+
+#length {
+  position: absolute;
+  top: 192px;
+  left: 40.2px; }
+
+#length-text {
+  display: inline-block;
+  padding-right: 6px; }
 
 #loading {
   position: absolute;
@@ -1105,12 +1149,497 @@ html, body, #mainWrapper {
   #triangle .icon {
     position: absolute;
     top: 0;
-    left: 0;
+    right: 0;
     font-size: 36px; }
 
 .sup {
-  font-size: 12px;
+  font-size: 7.2px;
   position: relative;
   bottom: 3px; }
+
+#operator {
+  position: absolute;
+  bottom: 12px;
+  left: -12px;
+  font-size: 12px;
+  height: 12px;
+  width: 12px; }
+  #operator .icon {
+    position: absolute;
+    top: 0;
+    left: 0; }
+
+#base-top, #base-bottom {
+  position: absolute;
+  left: 7px;
+  font-size: 6px;
+  line-height: 6px; }
+
+#base-top {
+  top: 0; }
+
+#base-bottom {
+  bottom: -8px; }
+
+#negative-sign {
+  position: absolute;
+  top: 6px;
+  left: -12px;
+  font-size: 12px;
+  height: 12px;
+  width: 12px; }
+  #negative-sign .icon {
+    position: absolute;
+    top: 0;
+    left: 0; }
+
+@-webkit-keyframes flash {
+  0% {
+    visibility: visible; }
+  50% {
+    visibility: visible; }
+  50% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-moz-keyframes flash {
+  0% {
+    visibility: visible; }
+  50% {
+    visibility: visible; }
+  50% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@keyframes flash {
+  0% {
+    visibility: visible; }
+  50% {
+    visibility: visible; }
+  50% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-webkit-keyframes battery {
+  0% {
+    visibility: visible; }
+  25% {
+    visibility: visible; }
+  25% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-moz-keyframes battery {
+  0% {
+    visibility: visible; }
+  25% {
+    visibility: visible; }
+  25% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@keyframes battery {
+  0% {
+    visibility: visible; }
+  25% {
+    visibility: visible; }
+  25% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-webkit-keyframes battery2 {
+  0% {
+    visibility: visible; }
+  50% {
+    visibility: visible; }
+  50% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-moz-keyframes battery2 {
+  0% {
+    visibility: visible; }
+  50% {
+    visibility: visible; }
+  50% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@keyframes battery2 {
+  0% {
+    visibility: visible; }
+  50% {
+    visibility: visible; }
+  50% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-webkit-keyframes battery3 {
+  0% {
+    visibility: visible; }
+  75% {
+    visibility: visible; }
+  75% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-moz-keyframes battery3 {
+  0% {
+    visibility: visible; }
+  75% {
+    visibility: visible; }
+  75% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@keyframes battery3 {
+  0% {
+    visibility: visible; }
+  75% {
+    visibility: visible; }
+  75% {
+    visibility: hidden; }
+  100% {
+    visibility: hidden; } }
+@-webkit-keyframes battery4 {}
+@-moz-keyframes battery4 {}
+.flash {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+/***** STATES ********/
+.laser-on .icon {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+.laser-off {
+  visibility: hidden; }
+
+.bluetooth-off {
+  visibility: hidden; }
+
+.bluetooth-pairing .icon {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+.battery-charging #battery-1 {
+  -webkit-animation: battery 2s infinite reverse;
+  -moz-animation: battery 2s infinite reverse;
+  animation: battery 2s infinite reverse; }
+.battery-charging #battery-2 {
+  -webkit-animation: battery2 2s infinite reverse;
+  -moz-animation: battery2 2s infinite reverse;
+  animation: battery2 2s infinite reverse; }
+.battery-charging #battery-3 {
+  -webkit-animation: battery3 2s infinite reverse;
+  -moz-animation: battery3 2s infinite reverse;
+  animation: battery3 2s infinite reverse; }
+.battery-charging #battery-4 {
+  -webkit-animation: battery4 2s infinite reverse;
+  -moz-animation: battery4 2s infinite reverse;
+  animation: battery4 2s infinite reverse; }
+
+.base-top #base-1 {
+  visibility: hidden; }
+.base-top #base-bottom {
+  visibility: hidden; }
+
+.base-bottom #base-3 {
+  visibility: hidden; }
+.base-bottom #base-top {
+  visibility: hidden; }
+
+.history-state-1 #error {
+  visibility: hidden; }
+.history-state-1 #base {
+  visibility: hidden; }
+.history-state-1 #max, .history-state-1 #min {
+  visibility: hidden; }
+.history-state-1 #loading {
+  visibility: hidden; }
+
+.length-state-1 #error, .length-state-1 #history {
+  visibility: hidden; }
+.length-state-1 #max, .length-state-1 #min {
+  visibility: hidden; }
+.length-state-1 #loading {
+  visibility: hidden; }
+.length-state-1 #degree, .length-state-1 #angel {
+  visibility: hidden; }
+.length-state-1 #operator {
+  visibility: hidden; }
+.length-state-1 .sup {
+  visibility: hidden; }
+.length-state-1 #type, .length-state-1 #triangle {
+  visibility: hidden; }
+.length-state-1 #negative-sign {
+  visibility: hidden; }
+.length-state-1 #result-line-1, .length-state-1 #result-line-2, .length-state-1 #result-line-3 {
+  visibility: hidden; }
+
+.length-state-2 #error, .length-state-2 #history {
+  visibility: hidden; }
+.length-state-2 #max, .length-state-2 #min {
+  visibility: hidden; }
+.length-state-2 #loading {
+  visibility: hidden; }
+.length-state-2 #degree, .length-state-2 #angel {
+  visibility: hidden; }
+.length-state-2 #operator {
+  visibility: hidden; }
+.length-state-2 .sup {
+  visibility: hidden; }
+.length-state-2 #type, .length-state-2 #triangle {
+  visibility: hidden; }
+.length-state-2 #negative-sign {
+  visibility: hidden; }
+.length-state-2 #result-line-1, .length-state-2 #result-line-2 {
+  visibility: hidden; }
+
+.length-state-3 #error, .length-state-3 #history {
+  visibility: hidden; }
+.length-state-3 #max, .length-state-3 #min {
+  visibility: hidden; }
+.length-state-3 #loading {
+  visibility: hidden; }
+.length-state-3 #degree, .length-state-3 #angel {
+  visibility: hidden; }
+.length-state-3 #operator {
+  visibility: hidden; }
+.length-state-3 .sup {
+  visibility: hidden; }
+.length-state-3 #type, .length-state-3 #triangle {
+  visibility: hidden; }
+.length-state-3 #negative-sign {
+  visibility: hidden; }
+.length-state-3 #result-line-1 {
+  visibility: hidden; }
+
+.length-state-4 #error, .length-state-4 #history {
+  visibility: hidden; }
+.length-state-4 #max, .length-state-4 #min {
+  visibility: hidden; }
+.length-state-4 #loading {
+  visibility: hidden; }
+.length-state-4 #degree, .length-state-4 #angel {
+  visibility: hidden; }
+.length-state-4 #operator {
+  visibility: hidden; }
+.length-state-4 .sup {
+  visibility: hidden; }
+.length-state-4 #type, .length-state-4 #triangle {
+  visibility: hidden; }
+.length-state-4 #negative-sign {
+  visibility: hidden; }
+
+.area-state-1 #error, .area-state-1 #history {
+  visibility: hidden; }
+.area-state-1 #max, .area-state-1 #min {
+  visibility: hidden; }
+.area-state-1 #loading {
+  visibility: hidden; }
+.area-state-1 #degree, .area-state-1 #angel {
+  visibility: hidden; }
+.area-state-1 #operator {
+  visibility: hidden; }
+.area-state-1 .sup {
+  visibility: hidden; }
+.area-state-1 #length, .area-state-1 #triangle {
+  visibility: hidden; }
+.area-state-1 #negative-sign {
+  visibility: hidden; }
+.area-state-1 #result-line-1 {
+  visibility: hidden; }
+.area-state-1 #type-volumn {
+  visibility: hidden; }
+.area-state-1 #result-4-sup {
+  visibility: visible; }
+
+.area-state-2 #error, .area-state-2 #history {
+  visibility: hidden; }
+.area-state-2 #max, .area-state-2 #min {
+  visibility: hidden; }
+.area-state-2 #loading {
+  visibility: hidden; }
+.area-state-2 #degree, .area-state-2 #angel {
+  visibility: hidden; }
+.area-state-2 #operator {
+  visibility: hidden; }
+.area-state-2 .sup {
+  visibility: hidden; }
+.area-state-2 #length, .area-state-2 #triangle {
+  visibility: hidden; }
+.area-state-2 #negative-sign {
+  visibility: hidden; }
+.area-state-2 #result-line-1 {
+  visibility: hidden; }
+.area-state-2 #type-volumn {
+  visibility: hidden; }
+.area-state-2 #result-4-sup {
+  visibility: visible; }
+
+.area-state-3 #error, .area-state-3 #history {
+  visibility: hidden; }
+.area-state-3 #max, .area-state-3 #min {
+  visibility: hidden; }
+.area-state-3 #loading {
+  visibility: hidden; }
+.area-state-3 #degree, .area-state-3 #angel {
+  visibility: hidden; }
+.area-state-3 #operator {
+  visibility: hidden; }
+.area-state-3 .sup {
+  visibility: hidden; }
+.area-state-3 #length, .area-state-3 #triangle {
+  visibility: hidden; }
+.area-state-3 #negative-sign {
+  visibility: hidden; }
+.area-state-3 #result-line-1 {
+  visibility: hidden; }
+.area-state-3 #type-volumn {
+  visibility: hidden; }
+.area-state-3 #result-4-sup {
+  visibility: visible; }
+
+.volumn-state-1 #error, .volumn-state-1 #history {
+  visibility: hidden; }
+.volumn-state-1 #max, .volumn-state-1 #min {
+  visibility: hidden; }
+.volumn-state-1 #loading {
+  visibility: hidden; }
+.volumn-state-1 #degree, .volumn-state-1 #angel {
+  visibility: hidden; }
+.volumn-state-1 #operator {
+  visibility: hidden; }
+.volumn-state-1 .sup {
+  visibility: hidden; }
+.volumn-state-1 #length, .volumn-state-1 #triangle {
+  visibility: hidden; }
+.volumn-state-1 #negative-sign {
+  visibility: hidden; }
+.volumn-state-1 #type-area {
+  visibility: hidden; }
+.volumn-state-1 #result-4-sup {
+  visibility: visible; }
+.volumn-state-1 .icon-cubic-3 {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+.volumn-state-2 #error, .volumn-state-2 #history {
+  visibility: hidden; }
+.volumn-state-2 #max, .volumn-state-2 #min {
+  visibility: hidden; }
+.volumn-state-2 #loading {
+  visibility: hidden; }
+.volumn-state-2 #degree, .volumn-state-2 #angel {
+  visibility: hidden; }
+.volumn-state-2 #operator {
+  visibility: hidden; }
+.volumn-state-2 .sup {
+  visibility: hidden; }
+.volumn-state-2 #length, .volumn-state-2 #triangle {
+  visibility: hidden; }
+.volumn-state-2 #negative-sign {
+  visibility: hidden; }
+.volumn-state-2 #type-area {
+  visibility: hidden; }
+.volumn-state-2 #result-4-sup {
+  visibility: visible; }
+.volumn-state-2 .icon-cubic-4 {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+.volumn-state-3 #error, .volumn-state-3 #history {
+  visibility: hidden; }
+.volumn-state-3 #max, .volumn-state-3 #min {
+  visibility: hidden; }
+.volumn-state-3 #loading {
+  visibility: hidden; }
+.volumn-state-3 #degree, .volumn-state-3 #angel {
+  visibility: hidden; }
+.volumn-state-3 #operator {
+  visibility: hidden; }
+.volumn-state-3 .sup {
+  visibility: hidden; }
+.volumn-state-3 #length, .volumn-state-3 #triangle {
+  visibility: hidden; }
+.volumn-state-3 #negative-sign {
+  visibility: hidden; }
+.volumn-state-3 #type-area {
+  visibility: hidden; }
+.volumn-state-3 #result-4-sup {
+  visibility: visible; }
+.volumn-state-3 .icon-cubic-2 {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+.volumn-state-4 #error, .volumn-state-4 #history {
+  visibility: hidden; }
+.volumn-state-4 #max, .volumn-state-4 #min {
+  visibility: hidden; }
+.volumn-state-4 #loading {
+  visibility: hidden; }
+.volumn-state-4 #degree, .volumn-state-4 #angel {
+  visibility: hidden; }
+.volumn-state-4 #operator {
+  visibility: hidden; }
+.volumn-state-4 .sup {
+  visibility: hidden; }
+.volumn-state-4 #length, .volumn-state-4 #triangle {
+  visibility: hidden; }
+.volumn-state-4 #negative-sign {
+  visibility: hidden; }
+.volumn-state-4 #type-area {
+  visibility: hidden; }
+.volumn-state-4 #result-4-sup {
+  visibility: visible; }
+
+.triangel-state-1 #error, .triangel-state-1 #history {
+  visibility: hidden; }
+.triangel-state-1 #max, .triangel-state-1 #min {
+  visibility: hidden; }
+.triangel-state-1 #loading {
+  visibility: hidden; }
+.triangel-state-1 #operator {
+  visibility: hidden; }
+.triangel-state-1 .sup {
+  visibility: hidden; }
+.triangel-state-1 #length, .triangel-state-1 #type {
+  visibility: hidden; }
+.triangel-state-1 #negative-sign {
+  visibility: hidden; }
+.triangel-state-1 #result-4-sup {
+  visibility: visible; }
+.triangel-state-1 #result-1-unit {
+  visibility: hidden; }
+.triangel-state-1 .icon-triangel-2 {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
+
+.triangel-state-2 #error, .triangel-state-2 #history {
+  visibility: hidden; }
+.triangel-state-2 #max, .triangel-state-2 #min {
+  visibility: hidden; }
+.triangel-state-2 #loading {
+  visibility: hidden; }
+.triangel-state-2 #operator {
+  visibility: hidden; }
+.triangel-state-2 .sup {
+  visibility: hidden; }
+.triangel-state-2 #length, .triangel-state-2 #type {
+  visibility: hidden; }
+.triangel-state-2 #negative-sign {
+  visibility: hidden; }
+.triangel-state-2 #result-4-sup {
+  visibility: visible; }
+.triangel-state-2 #result-1-unit {
+  visibility: hidden; }
 
 /*# sourceMappingURL=styles.css.map */
