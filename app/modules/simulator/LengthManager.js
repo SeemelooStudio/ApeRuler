@@ -8,6 +8,11 @@ define(["jquery", "modules/simulator/FuncManager"],
                 this.data = 0.0;
                 this.history = [null, null, null];
                 this.state = 'NORMAL';
+                this.subState = 'NORMAL';
+                this.laserState = "OFF";
+            },
+            onEnter: function() {
+                this.onStateChange('NORMAL');
             },
             onData: function() {
 
@@ -18,14 +23,18 @@ define(["jquery", "modules/simulator/FuncManager"],
                     case "PLUS":
                         //TODO 
                         displayUtil.updateLine3(this.data);
-                        displayUtil.updateLine4(this.data + this.history[0]);
-                        this.data = this.data + this.history[0];
+                        displayUtil.updateLine4(this.data + this.history[1]);
+                        this.data = this.data + this.history[1];
+                        this.history = [this.data, this.data - this.history[1], this.history[1]];
+                        this.onStateChange('PLUSRESULT');
                         break;
                     case "MINUS":
                         //TODO 
                         displayUtil.updateLine3(this.data);
-                        displayUtil.updateLine4(this.history[0] - this.data);
-                        this.data = this.data - this.history[0];
+                        displayUtil.updateLine4(this.history[1] - this.data);
+                        this.data = this.data - this.history[1];
+                        this.history = [this.data, this.history[1] - this.data, this.history[1]];
+                        this.onStateChange('MINUSRESULT');
                         break;
                     case "NORMAL":
                         displayUtil.updateLine4(this.data);
@@ -36,43 +45,93 @@ define(["jquery", "modules/simulator/FuncManager"],
             onLaserReady: function() {
 
                 console.log('[LengthManager] laser is ready...');
+                this.laserState = "ON";
                 //TODO  output state to screen
                 switch (this.state) {
+                    case "NORMALRESULT":
+                    case "PLUSRESULT":
+                    case "MINUSRESULT":
+                        this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4('--.---');
+                        this.onStateChange('NORMAL');
+                        break;
                     case "PLUS":
                         //TODO 
-                        this.history = [this.data, null, null];
-                        displayUtil.updateLine2(this.data);
-                        this.data = 0.0;
-                        displayUtil.updateLine3('--.---');
+                        this.history = [null,this.data, null];
+                        this.updateLengthHistory(this.history);
                         displayUtil.updateLine4('--.---');
                         break;
                     case "MINUS":
                         //TODO 
-                        this.history = [this.data, null, null];
-                        displayUtil.updateLine2(this.data);
-                        this.data = 0.0;
-                        displayUtil.updateLine3('--.---');
+                        this.history = [null,this.data, null];
+                        this.updateLengthHistory(this.history);
                         displayUtil.updateLine4('--.---');
                         break;
                     case "NORMAL":
-                        displayUtil.updateLine4('--.---');
-                        this.history.unshift(this.data);
-                        this.history.pop();
+                        if (this.data) {
+                            this.history.unshift(this.data);
+                            this.history.pop();
+                        }
                         this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4('--.---');
                         this.onStateChange('NORMAL');
                         break;
                 }
-
             },
 
             onPlus: function() {
                 this.onStateChange('PLUS');
+                this.trigger('turnOnLaser');
             },
             onMinus: function() {
                 this.onStateChange('MINUS');
+                this.trigger('turnOnLaser');
             },
             onPower: function() {
-                displayUtil.updateLine4('--.---');
+
+                if (this.laserState === 'ON') {
+                    this.trigger('turnOffLaser');
+                    if (this.state === "NORMAL") this.onStateChange('NORMALRESULT');
+                } else {
+                    switch (this.state) {
+                        case "PLUS":
+                        case "MINUS":
+                            this.history = [null, null, null];
+                            this.data = 0.0;
+                            displayUtil.updateLine4('--.---');
+                            this.onStateChange('NORMAL');
+                            break;
+                        case "PLUSRESULT":
+                            this.history = [null, this.history[2], null];
+                            this.data = 0.0;
+                            displayUtil.updateLine2(this.history[2]);
+                            displayUtil.updateLine3('--.---');
+                            displayUtil.updateLine4('--.---');
+                            this.onStateChange('PLUS');
+                            break;
+                        case "MINUSRESULT":
+                            this.history = [null, this.history[2], null];
+                            this.data = 0.0;
+                            displayUtil.updateLine2(this.history[2]);
+                            displayUtil.updateLine3('--.---');
+                            displayUtil.updateLine4('--.---');
+                            this.onStateChange('MINUS');
+                            break;
+                        case "NORMAL":
+                        case "NORMALRESULT":
+                            this.data = this.history.shift();
+                            this.history.push(null);
+                            if (this.data) {
+                                displayUtil.updateLine4(this.data);
+                            } else {
+                                this.data = 0.0;
+                                displayUtil.updateLine4('--.---');
+                            }
+
+                            this.onStateChange('NORMAL');
+                    }
+                    this.updateLengthHistory(this.history);
+                }
             },
             onHistory: function() {
 

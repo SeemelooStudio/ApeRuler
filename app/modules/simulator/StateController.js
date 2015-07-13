@@ -23,7 +23,6 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                     "ANGLE": new AngleManager()
                 }
 
-                this.onStateChange("LENGTH");
 
             },
             enqueue: function(btnCmd) {
@@ -34,13 +33,12 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                 switch (btnCmd) {
                     case "PLUS":
                         this.funcManager.onPlus();
-                        this.turnOnLaser();
                         break;
                     case "MINUS":
                         this.funcManager.onMinus();
-                        this.turnOnLaser();
                         break;
                     case "POWER":
+                        this.turnOffLaser();
                         this.funcManager.onPower();
                         break;
                     default:
@@ -48,42 +46,18 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                 }
             },
             onStateChange: function(targetState) {
-                if(this.funcManager){
-                    this.funcManager.onExit();
-                }
+                this.beforeStateChange();
                 this.state = targetState;
                 this.funcManager = this.managers[this.state];
-                this.funcManager.onEnter();
-
-                switch (targetState) {
-                    case "VOLUME":
-                        break;
-                    case "AREA":
-                        break;
-                    case "ANGLE":
-                        break;
-                    case "LIM_PRE":
-                        //TODO 
-                        break;
-                    case "LIM_ONGOING":
-                        //TODO 
-                        break;
-                    case "LENGTH":
-                        break;
-                }
-
-                console.log('OnStateChange: ' + targetState);
-                console.log('Current state: ' + this.state);
-
+                this.afterStateChange();
             },
             onMeasure: function() {
-
+                if(!this.funcManager) this.onPowerOn();
                 if (this.laserState == "OFF") {
                     this.turnOnLaser();
                 } else {
-
-                    this.funcManager.onData();
                     this.turnOffLaser();
+                    this.funcManager.onData();
                 }
 
             },
@@ -96,6 +70,7 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
             turnOffLaser: function() {
                 displayUtil.turnOffLaser();
                 this.laserState = "OFF";
+                this.funcManager.onLaserOff();
             },
             onTypeChange: function() {
                 var targetState = util.findNextItem(this.state, this.types);
@@ -109,10 +84,30 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                 displayUtil.changeBase();
             },
             onPowerOff: function() {
+                this.turnOffLaser();
                 displayUtil.updateScreenClass('power-off');
+            },
+            onPowerOn: function() {
+                this.onStateChange("LENGTH");
+            },
+            beforeStateChange: function() {
+                console.log('Current state: ' + this.state);
+                if(this.funcManager){
+                    this.stopListening(this.funcManager);
+                    this.funcManager.onExit();
+                }
+            },
+            afterStateChange: function() {
+                this.listenTo(this.funcManager, 'turnOnLaser', this.turnOnLaser);
+                this.listenTo(this.funcManager, 'exit', this.exitCurrentState);
+                if(this.funcManager){
+                    this.funcManager.onEnter();
+                }
+                console.log('afterStateChange: ' + this.state);
+            },
+            exitCurrentState: function() {
+                this.onStateChange('LENGTH');
             }
-
-
         });
 
         return new StateController();

@@ -4,20 +4,15 @@ define(["jquery", "backbone"],
 
     function ($, Backbone) {
         var FuncManager = Backbone.Model.extend({
-
-            defaults: {
-
-            },
             initialize: function () {
                 this.data = "0.0";
-
+                this.laserState = "OFF";
             },
-
             onData: function() {
             },
 
             onLaserReady: function() {
-
+                this.laserState = "OFF";
             },
             onPlus: function() {
 
@@ -35,6 +30,10 @@ define(["jquery", "backbone"],
 
             },
             onExit: function() {
+
+            },
+            onLaserOff:function() {
+                this.laserState = "OFF";
             }
 
         });
