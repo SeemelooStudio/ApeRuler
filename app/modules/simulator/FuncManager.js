@@ -30,6 +30,11 @@ define(["jquery", "backbone"],
             },
             onHistory: function() {
 
+            },
+            onEnter: function() {
+
+            },
+            onExit: function() {
             }
 
         });

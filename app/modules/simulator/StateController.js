@@ -1,8 +1,8 @@
 // KeypadHandler.js
 
-define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulator/AreaManager","modules/simulator/VolumnManager","modules/simulator/AngleManager"],
+define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulator/AreaManager","modules/simulator/VolumeManager","modules/simulator/AngleManager"],
 
-    function($, Backbone, LengthManager, AreaManager, VolumnManager, AngleManager) {
+    function($, Backbone, LengthManager, AreaManager, VolumeManager, AngleManager) {
         var StateController = Backbone.Model.extend({
             defaults: {
 
@@ -13,11 +13,17 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                 this.state = "LENGTH";
                 this.laserState = "OFF";
 
-                this.types = ["AREA", "VOLUMN", "LENGTH"];
+                this.types = ["AREA", "VOLUME", "LENGTH"];
                 this.methods = ["ANGLE", "LENGTH"];
 
+                this.managers = {
+                    "LENGTH": new LengthManager(),
+                    "AREA": new AreaManager(),
+                    "VOLUME": new VolumeManager(),
+                    "ANGLE": new AngleManager()
+                }
 
-                this.funcManager = new LengthManager();
+                this.onStateChange("LENGTH");
 
             },
             enqueue: function(btnCmd) {
@@ -43,20 +49,17 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
             },
             onStateChange: function(targetState) {
 
+                this.funcManager.onExit();
                 this.state = targetState;
+                this.funcManager = this.managers[this.state];
+                this.funcManager.onEnter();
 
                 switch (targetState) {
-                    case "VOLUMN":
-                        this.funcManager = new VolumnManager();
-                        this.turnOnLaser();
+                    case "VOLUME":
                         break;
                     case "AREA":
-                        this.funcManager = new AreaManager();
-                        this.turnOnLaser();
                         break;
                     case "ANGLE":
-                        this.funcManager = new AngleManager();
-                        this.turnOnLaser();
                         break;
                     case "LIM_PRE":
                         //TODO 
@@ -65,7 +68,6 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                         //TODO 
                         break;
                     case "LENGTH":
-                        this.funcManager = new LengthManager();
                         break;
                 }
 
