@@ -57,6 +57,7 @@ define(["jquery", "modules/simulator/FuncManager", "modules/simulator/DataContai
                 this.trigger('turnOnLaser');
             },
             onPower: function() {
+                var historyCount = 0;
                 if (this.laserState === 'ON') {
                     this.trigger('turnOffLaser');
 
@@ -125,6 +126,7 @@ define(["jquery", "modules/simulator/FuncManager", "modules/simulator/DataContai
 
 
                         break;
+
                     }
                 }
 
@@ -160,6 +162,7 @@ define(["jquery", "modules/simulator/FuncManager", "modules/simulator/DataContai
 
 
                         var historyCount = this.dataContainer.getHistoryCount();
+
                         if (historyCount === 0) displayUtil.updateScreenClass('length-state-1');
                         if (historyCount === 1) displayUtil.updateScreenClass('length-state-2');
                         if (historyCount === 2) displayUtil.updateScreenClass('length-state-3');
@@ -174,6 +177,7 @@ define(["jquery", "modules/simulator/FuncManager", "modules/simulator/DataContai
                         this.dataContainer.addData(this.tmpData);
 
                         displayUtil.updateLine4(this.dataContainer.data);
+
                         break;
 
                     case "PLUSRESULT":
