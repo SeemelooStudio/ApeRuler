@@ -7,7 +7,7 @@ module.exports = ->
     release:
       options:
         mainConfigFile: "app/config.js"
-        generateSourceMaps: true
+        generateSourceMaps: false
         include: ["main"]
         out: "dist/source.min.js"
         optimize: "uglify2"

@@ -36,6 +36,18 @@
 
 }
 
+.icon-area-1:before {
+	content: "\e609";
+}
+.icon-area-2:before {
+	content: "\e61b";
+}
+.icon-area-3:before {
+	content: "\e61c";
+}
+.icon-cubic-1:before {
+	content: "\e61d";
+}
 .icon-plus-2:before {
 	content: "\e619";
 }
@@ -56,9 +68,6 @@
 }
 .icon-device:before {
 	content: "\e618";
-}
-.icon-cubic-1:before {
-	content: "\e609";
 }
 .icon-cubic-2:before {
 	content: "\e60a";
@@ -107,6 +116,9 @@
 }
 .icon-laser:before {
 	content: "\e608";
+}
+.icon-trash-o:before {
+	content: "\e61e";
 }
 .icon-power:before {
 	content: "\e600";

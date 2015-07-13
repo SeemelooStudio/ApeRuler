@@ -54,7 +54,6 @@ define(['backbone', 'marionette', 'mustache', 'jquery', 'text!modules/main/main.
                 });
 
                 mc.remove('doubletap');
-                mc.remove('press');
                 mc.remove('rotate');
                 mc.remove('pinch');
             },

@@ -1,11 +1,12 @@
-﻿<div id="device">
+﻿<div id="light"></div>
+<div id="device">
     <div id="screenCover"></div>
-    <div id="screen" class="triangel-state-1">
-        <div id="laser" class="laser-on">
+    <div id="screen" class="power-off">
+        <div id="laser" class="laser-off">
             <i id="laserIcon" class="icon icon-laser">
 			</i>
         </div>
-        <div id="bluetooth" class="bluetooth-off">
+        <div id="bluetooth">
             <i id="bluetoothIcon" class="icon icon-bluetooth">
 			</i>
         </div>
@@ -36,24 +37,27 @@
                 <br>小</div>
             <div id="angel">仰角</div>
             <div id="degree"></div>
-            <span id="result-1-number" class="digital">0.0.0.0.0</span><span id="result-1-unit" class="unit">m</span><span id="result-1-sup" class="digital sup">8</span>
+            <span id="result-1-number" class="digital">--.---</span><span id="result-1-unit" class="unit">m</span><span id="result-1-sup" class="digital sup">8</span>
         </div>
         <div id="result-line-2" class="line">
             <div id="max">最
                 <br>大</div>
-            <span id="result-2-number" class="digital">0.0.0.0.0</span><span id="result-2-unit" class="unit">m</span><span id="result-2-sup" class="digital sup">8</span>
+            <span id="result-2-number" class="digital">--.---</span><span id="result-2-unit" class="unit">m</span><span id="result-2-sup" class="digital sup">8</span>
         </div>
         <div id="result-line-3" class="line">
         	<div id="operator"><i id="oprator-plus" class="icon icon-plus-2"></i><i id="oprator-minus" class="icon icon-minus-2"></i></div>
-            <span id="result-3-number" class="digital">0.0.0.0.0</span><span id="result-3-unit" class="unit">m</span><span id="result-3-sup" class="digital sup">8</span>
+            <span id="result-3-number" class="digital">--.---</span><span id="result-3-unit" class="unit">m</span><span id="result-3-sup" class="digital sup">8</span>
         </div>
         <div id="result-line-4" class="line">
-            <div id="result-4-number" class="digital">0.0.0.0.0</div>
+            <div id="result-4-number" class="digital">--.---</div>
             <div id="negative-sign"><i class="icon icon-minus-2"></i></div>
             <div id="result-4-meta"><span id="result-4-unit" class="unit">m</span><span id="result-4-sup" class="digital sup">8</span></div>
         </div>
         <div id="type">
             <div id="type-cubic">
+                <i class="icon icon-area-1"></i>
+                <i class="icon icon-area-2"></i>
+                <i class="icon icon-area-3"></i>
                 <i class="icon icon-cubic-1"></i>
                 <i class="icon icon-cubic-2"></i>
                 <i class="icon icon-cubic-3"></i>
@@ -93,7 +97,30 @@
 </div>
 <div id="side-btns">
     <div id="plus_btn" class="sideBtn"><i class="icon icon-plus"></i></div>
+    <div class="sideBtnPressIcon">
+        <i class="icon icon-area-1"></i>
+        <i class="icon icon-area-2"></i>
+        <i class="icon icon-area-3"></i>
+        <i class="icon icon-cubic-1"></i>
+        <i class="icon icon-cubic-2"></i>
+        <i class="icon icon-cubic-3"></i>
+        <i class="icon icon-cubic-4"></i>
+    </div>
     <div id="minus_btn" class="sideBtn"><i class="icon icon-minus"></i></div>
-    <div id="power_btn" class="sideBtn"><i class="icon icon-power"></i></div>
+    <div class="sideBtnPressIcon">
+        <i class="icon icon-triangel-1"></i>
+        <i class="icon icon-triangel-2"></i>
+    </div>
     <div id="history_btn" class="sideBtn"><i class="icon icon-history"></i></div>
+    <div class="sideBtnPressIcon">
+        <i class="icon icon-device"></i>
+        <i class="icon icon-base-1"></i>
+        <i class="icon icon-base-2"></i>
+        <i class="icon icon-base-3"></i>
+    </div>
+    <div id="power_btn" class="sideBtn"><i class="icon icon-trash-o"></i></div>
+    <div class="sideBtnPressIcon">
+        <i class="icon icon-power"></i>
+    </div>
+    
 </div>

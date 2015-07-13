@@ -1,16 +1,12 @@
-﻿define(['backbone', 'marionette','modules/welcome/WelcomeView','models/KeypadHandler'],
-    function (Backbone, Marionette, WelcomeView, KeypadHandler) {
-
-
-		var keypadHandler;
+﻿define(['backbone', 'marionette','modules/simulator/SimulatorView','modules/simulator/StateController'],
+    function (Backbone, Marionette, SimulatorView, StateController) {
 
         return Marionette.Controller.extend({
             initialize: function (options) {
 
             },
-            welcome: function() {
-      			keypadHandler = new KeypadHandler();
-                var welcome = new WelcomeView({ model: keypadHandler });
+            simulator: function() {
+                var simulator = new SimulatorView({ model: StateController });
             }
         });
     });

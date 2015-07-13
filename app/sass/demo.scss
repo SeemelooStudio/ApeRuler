@@ -13,6 +13,11 @@ html,body,#mainWrapper {
 	height:100%;
 	overflow:hidden;
 }
+#light {
+	@include centerAndOffset(2px,$pixels-per-mm*10,-$pixels-per-mm*15,-$pixels-per-mm*45);
+	@include linear-gradient(to top, $red, $background-color);
+	display:none;
+}
 #welcomeWrapper {
 	@include centerAndOffset($pixels-per-mm*50,$pixels-per-mm*80);
 }
@@ -26,6 +31,7 @@ html,body,#mainWrapper {
 #side-btns {
 	@include position(absolute,0 0 null null);
 	@include size($pixels-per-mm*18 $pixels-per-mm*80);
+	padding-top:$pixels-per-mm*5;
 }
 #screen {
 	@include size($pixels-per-mm*20 $pixels-per-mm*40);
@@ -76,11 +82,15 @@ html,body,#mainWrapper {
 	letter-spacing:-2px;
 	padding-right:2px;
 	width:$pixels-per-mm*15.125;
+	text-align:right;
+	display:inline-block;
 }
 #result-4-number {
 	font-size:$pixels-per-mm*7;
 	letter-spacing:-2px;
 	width:$pixels-per-mm*18.125;
+	text-align:right;
+	display:inline-block;
 }
 #result-line-1,#result-line-2,#result-line-3,#result-line-4 {
 	@include position(absolute);
@@ -108,15 +118,26 @@ html,body,#mainWrapper {
 }
 #result-4-meta {
 	text-align:right;
-	line-height:$pixels-per-mm*3;
+	line-height:$pixels-per-mm*1;
 }
 .sideBtn {
 	@include size($pixels-per-mm*8);
 	border-radius:100%;
 	border:1px solid $border-color;
-	margin:0 auto $pixels-per-mm*2;
+	margin:0 auto;
 	text-align:center;
 	line-height:$pixels-per-mm*8-2;
+}
+.sideBtnPressIcon {
+	@include size($pixels-per-mm*8 $pixels-per-mm*4);
+	text-align:center;
+	font-size:$pixels-per-mm*2;
+	color:darken($text-color,20%);
+	position:relative;
+	margin:0 auto $pixels-per-mm*0.5;
+	.icon {
+		@include centerAndOffset($pixels-per-mm*2);
+	}
 }
 .sideBtn:active,#measure:active {
 	background-color:darken($red,20%);
@@ -383,7 +404,17 @@ html,body,#mainWrapper {
 .length-state-4 {
 	@include length-state-common;
 }
-
+.length-state-5 {
+	@include length-state-common;
+	#result-line-1{@include hide;}
+	#operator{@include show;}
+}
+.length-state-6 {
+	@include length-state-common;
+	#result-line-1{@include hide;}
+	#operator{@include show;}
+	#oprator-plus{@include hide;}
+}
 
 @mixin area-state-common {
 	#error,#history {@include hide;}
@@ -397,12 +428,15 @@ html,body,#mainWrapper {
 	#result-line-1{@include hide;}
 	#type-volumn{@include hide;}
 	#result-4-sup{@include show;}
+	.icon-cubic-1,.icon-cubic-2,.icon-cubic-3,.icon-cubic-4{@include hide;}
 }
 .area-state-1 {
 	@include area-state-common;
+	.icon-area-3 {@include animation(flash 1s infinite);}
 }
 .area-state-2 {
 	@include area-state-common;
+	.icon-area-2 {@include animation(flash 1s infinite);}
 }
 .area-state-3 {
 	@include area-state-common;
@@ -445,7 +479,7 @@ html,body,#mainWrapper {
 	.sup {@include hide;}
 	#length,#type {@include hide;}
 	#negative-sign{@include hide;}
-	#result-4-sup{@include show;}
+	#result-4-sup{@include hide;}
 	#result-1-unit {@include hide;}
 }
 .triangel-state-1 {
@@ -454,4 +488,15 @@ html,body,#mainWrapper {
 }
 .triangel-state-2 {
 	@include triangel-state-common;
+}
+.power-off {
+	#error,#history {@include hide;}
+	#max,#min {@include hide;}
+	#loading{@include hide;}
+	#operator{@include hide;}
+	.sup {@include hide;}
+	#length,#type {@include hide;}
+	#negative-sign{@include hide;}
+	#triangle,#battery,#base,#bluetooth {@include hide;}
+	#result-line-1,#result-line-2,#result-line-3,#result-line-4 {@include hide;}
 }

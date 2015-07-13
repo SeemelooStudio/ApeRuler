@@ -1,4 +1,4 @@
-﻿define(['backbone', 'marionette', 'mustache', 'jquery', 'text!modules/welcome/welcome.html', 'iscroll'],
+﻿define(['backbone', 'marionette', 'mustache', 'jquery', 'text!modules/simulator/simulator.html', 'iscroll'],
     function(Backbone, Marionette, Mustache, $, template) {
 
         return Marionette.ItemView.extend({
@@ -6,14 +6,12 @@
                 return Mustache.render(template, serialized_model);
             },
             ui: {
-
+                'laser':'#laser'
             },
-            events: {
-
+            modelEvents: {
             },
             initialize: function() {
                 app.rootView.updatePrimaryRegion(this);
-
             },
             onShow: function() {
                 this.iscroll = new IScroll(this.$el[0]);
@@ -27,37 +25,38 @@
                 "tap #minus_btn": "clickMinus",
                 "tap #power_btn": "clickPower",
                 "tap #history_btn": "clickHistory",
-                "tap #measure": "clickMeasure"
+                "tap #measure": "clickMeasure",
+                "press #plus_btn": "pressPlus",
+                "press #minus_btn": "pressMinus",
+                "press #history_btn":"pressHistory",
+                "press #power_btn": "powerOff"
             },
             clickPlus: function(ev) {
-                var self = this;
-                ev.preventDefault();
-                ev.stopPropagation();
                 this.model.enqueue("PLUS");
             },
             clickMinus: function(ev) {
-                var self = this;
-                ev.preventDefault();
-                ev.stopPropagation();
                 this.model.enqueue("MINUS");
             },
             clickPower: function(ev) {
-                var self = this;
-                ev.preventDefault();
-                ev.stopPropagation();
                 this.model.enqueue("POWER");
             },
             clickHistory: function(ev) {
-                var self = this;
-                ev.preventDefault();
-                ev.stopPropagation();
                 this.model.enqueue("HISTORY");
             },
             clickMeasure: function(ev) {
-                var self = this;
-                ev.preventDefault();
-                ev.stopPropagation();
                 this.model.onMeasure();
+            },
+            pressPlus: function(ev) {
+                this.model.onTypeChange();
+            },
+            pressMinus: function(ev) {
+                this.model.onMethodChange();
+            },
+            pressHistory: function(ev) {
+                this.model.onChangeBase();
+            },
+            powerOff: function(ev) {
+                this.model.onPowerOff();
             },
             id: 'welcomeWrapper'
         });

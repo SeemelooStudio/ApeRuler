@@ -887,6 +887,19 @@ html, body, #mainWrapper {
   height: 100%;
   overflow: hidden; }
 
+#light {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  height: 60px;
+  width: 2px;
+  margin-top: -300px;
+  margin-left: -91px;
+  background-color: #F44336;
+  background-image: -webkit-linear-gradient(bottom, #F44336, #222);
+  background-image: linear-gradient(to top,#F44336, #222);
+  display: none; }
+
 #welcomeWrapper {
   position: absolute;
   top: 50%;
@@ -910,7 +923,8 @@ html, body, #mainWrapper {
   top: 0;
   right: 0;
   height: 480px;
-  width: 108px; }
+  width: 108px;
+  padding-top: 30px; }
 
 #screen {
   height: 240px;
@@ -970,12 +984,16 @@ html, body, #mainWrapper {
   font-size: 30px;
   letter-spacing: -2px;
   padding-right: 2px;
-  width: 90.75px; }
+  width: 90.75px;
+  text-align: right;
+  display: inline-block; }
 
 #result-4-number {
   font-size: 42px;
   letter-spacing: -2px;
-  width: 108.75px; }
+  width: 108.75px;
+  text-align: right;
+  display: inline-block; }
 
 #result-line-1, #result-line-2, #result-line-3, #result-line-4 {
   position: absolute;
@@ -1007,16 +1025,33 @@ html, body, #mainWrapper {
 
 #result-4-meta {
   text-align: right;
-  line-height: 18px; }
+  line-height: 6px; }
 
 .sideBtn {
   height: 48px;
   width: 48px;
   border-radius: 100%;
   border: 1px solid #EEE;
-  margin: 0 auto 12px;
+  margin: 0 auto;
   text-align: center;
   line-height: 46px; }
+
+.sideBtnPressIcon {
+  height: 24px;
+  width: 48px;
+  text-align: center;
+  font-size: 12px;
+  color: #cccccc;
+  position: relative;
+  margin: 0 auto 3px; }
+  .sideBtnPressIcon .icon {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 12px;
+    width: 12px;
+    margin-top: -6px;
+    margin-left: -6px; }
 
 .sideBtn:active, #measure:active {
   background-color: #ba160a; }
@@ -1435,6 +1470,50 @@ html, body, #mainWrapper {
 .length-state-4 #negative-sign {
   visibility: hidden; }
 
+.length-state-5 #error, .length-state-5 #history {
+  visibility: hidden; }
+.length-state-5 #max, .length-state-5 #min {
+  visibility: hidden; }
+.length-state-5 #loading {
+  visibility: hidden; }
+.length-state-5 #degree, .length-state-5 #angel {
+  visibility: hidden; }
+.length-state-5 #operator {
+  visibility: hidden; }
+.length-state-5 .sup {
+  visibility: hidden; }
+.length-state-5 #type, .length-state-5 #triangle {
+  visibility: hidden; }
+.length-state-5 #negative-sign {
+  visibility: hidden; }
+.length-state-5 #result-line-1 {
+  visibility: hidden; }
+.length-state-5 #operator {
+  visibility: visible; }
+
+.length-state-6 #error, .length-state-6 #history {
+  visibility: hidden; }
+.length-state-6 #max, .length-state-6 #min {
+  visibility: hidden; }
+.length-state-6 #loading {
+  visibility: hidden; }
+.length-state-6 #degree, .length-state-6 #angel {
+  visibility: hidden; }
+.length-state-6 #operator {
+  visibility: hidden; }
+.length-state-6 .sup {
+  visibility: hidden; }
+.length-state-6 #type, .length-state-6 #triangle {
+  visibility: hidden; }
+.length-state-6 #negative-sign {
+  visibility: hidden; }
+.length-state-6 #result-line-1 {
+  visibility: hidden; }
+.length-state-6 #operator {
+  visibility: visible; }
+.length-state-6 #oprator-plus {
+  visibility: hidden; }
+
 .area-state-1 #error, .area-state-1 #history {
   visibility: hidden; }
 .area-state-1 #max, .area-state-1 #min {
@@ -1457,6 +1536,12 @@ html, body, #mainWrapper {
   visibility: hidden; }
 .area-state-1 #result-4-sup {
   visibility: visible; }
+.area-state-1 .icon-cubic-1, .area-state-1 .icon-cubic-2, .area-state-1 .icon-cubic-3, .area-state-1 .icon-cubic-4 {
+  visibility: hidden; }
+.area-state-1 .icon-area-3 {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
 
 .area-state-2 #error, .area-state-2 #history {
   visibility: hidden; }
@@ -1480,6 +1565,12 @@ html, body, #mainWrapper {
   visibility: hidden; }
 .area-state-2 #result-4-sup {
   visibility: visible; }
+.area-state-2 .icon-cubic-1, .area-state-2 .icon-cubic-2, .area-state-2 .icon-cubic-3, .area-state-2 .icon-cubic-4 {
+  visibility: hidden; }
+.area-state-2 .icon-area-2 {
+  -webkit-animation: flash 1s infinite;
+  -moz-animation: flash 1s infinite;
+  animation: flash 1s infinite; }
 
 .area-state-3 #error, .area-state-3 #history {
   visibility: hidden; }
@@ -1503,6 +1594,8 @@ html, body, #mainWrapper {
   visibility: hidden; }
 .area-state-3 #result-4-sup {
   visibility: visible; }
+.area-state-3 .icon-cubic-1, .area-state-3 .icon-cubic-2, .area-state-3 .icon-cubic-3, .area-state-3 .icon-cubic-4 {
+  visibility: hidden; }
 
 .volumn-state-1 #error, .volumn-state-1 #history {
   visibility: hidden; }
@@ -1615,7 +1708,7 @@ html, body, #mainWrapper {
 .triangel-state-1 #negative-sign {
   visibility: hidden; }
 .triangel-state-1 #result-4-sup {
-  visibility: visible; }
+  visibility: hidden; }
 .triangel-state-1 #result-1-unit {
   visibility: hidden; }
 .triangel-state-1 .icon-triangel-2 {
@@ -1638,8 +1731,27 @@ html, body, #mainWrapper {
 .triangel-state-2 #negative-sign {
   visibility: hidden; }
 .triangel-state-2 #result-4-sup {
-  visibility: visible; }
+  visibility: hidden; }
 .triangel-state-2 #result-1-unit {
+  visibility: hidden; }
+
+.power-off #error, .power-off #history {
+  visibility: hidden; }
+.power-off #max, .power-off #min {
+  visibility: hidden; }
+.power-off #loading {
+  visibility: hidden; }
+.power-off #operator {
+  visibility: hidden; }
+.power-off .sup {
+  visibility: hidden; }
+.power-off #length, .power-off #type {
+  visibility: hidden; }
+.power-off #negative-sign {
+  visibility: hidden; }
+.power-off #triangle, .power-off #battery, .power-off #base, .power-off #bluetooth {
+  visibility: hidden; }
+.power-off #result-line-1, .power-off #result-line-2, .power-off #result-line-3, .power-off #result-line-4 {
   visibility: hidden; }
 
 /*# sourceMappingURL=styles.css.map */

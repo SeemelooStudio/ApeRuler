@@ -13,10 +13,7 @@ require.config({
         "jquery-hammerjs":"../vendor/bower/jquery-hammerjs/jquery.hammer",
         "iscroll":"../vendor/bower/iscroll/build/iscroll",
         "waitforimages":"../vendor/bower/waitForImages/dist/jquery.waitforimages.min",
-        "ajaxpro": "libs/AjaxPro",
-        "util": 'libs/Util',
-        "flytoeffect": "libs/EffectFlyTo",
-        "urls": "urls"
+        "util": "modules/common/Util"
     },
 
     deps: ["main"],
