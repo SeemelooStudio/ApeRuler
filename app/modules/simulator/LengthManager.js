@@ -76,6 +76,7 @@ define(["jquery", "modules/simulator/FuncManager"],
                             this.onStateChange('MINUS');
                             break;
                         case "NORMAL":
+                        case "NORMALRESULT":
                             this.data = this.history.pop();
                             this.history.unshift(null);
                             historyCount = this.getHistoryCount(this.history);
@@ -86,16 +87,6 @@ define(["jquery", "modules/simulator/FuncManager"],
                             this.updateLengthHistory(this.history);
                             this.onStateChange('NORMALRESULT');
                             break;
-                        case "NORMALRESULT":
-                            this.data = this.history.pop();
-                            this.history.unshift(null);
-                            historyCount = this.getHistoryCount(this.history);
-                            if (historyCount === 0) displayUtil.updateScreenClass('length-state-1');
-                            if (historyCount === 1) displayUtil.updateScreenClass('length-state-2');
-                            if (historyCount === 2) displayUtil.updateScreenClass('length-state-3');
-                            if (historyCount === 3) displayUtil.updateScreenClass('length-state-4');
-                            this.updateLengthHistory(this.history);
-                            displayUtil.updateLine4(this.data);
                     }
                 }
 
