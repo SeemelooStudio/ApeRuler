@@ -3,7 +3,9 @@ define(function(require, exports, module) {
 
     function formatDigits(number) {
         var digis = '--.---';
-        if(number<100){
+        if(number===null) {
+            digis = '--.---';
+        }else if(number<100){
             digis = number.toFixed(3);
         } else if(number<1000) {
             digis = number.toFix(2);

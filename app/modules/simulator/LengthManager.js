@@ -8,42 +8,30 @@ define(["jquery", "modules/simulator/FuncManager"],
                 this.data = 0.0;
                 this.history = [null, null, null];
                 this.state = 'NORMAL';
-                this.subState = 'NORMAL';
                 this.laserState = "OFF";
             },
             onEnter: function() {
                 this.onStateChange('NORMAL');
             },
             onData: function() {
-
                 this.data = Math.round(10 * Math.random() * 1000) / 1000;
                 console.log('[LengthManager] data in...' + this.data);
-
                 switch (this.state) {
                     case "PLUS":
-                        //TODO 
-                        displayUtil.updateLine3(this.data);
-                        displayUtil.updateLine4(this.data + this.history[1]);
-                        this.data = this.data + this.history[1];
-                        this.history = [this.data, this.data - this.history[1], this.history[1]];
                         this.onStateChange('PLUSRESULT');
                         break;
                     case "MINUS":
-                        //TODO 
-                        displayUtil.updateLine3(this.data);
-                        displayUtil.updateLine4(this.history[1] - this.data);
-                        this.data = this.data - this.history[1];
-                        this.history = [this.data, this.history[1] - this.data, this.history[1]];
                         this.onStateChange('MINUSRESULT');
                         break;
                     case "NORMAL":
-                        displayUtil.updateLine4(this.data);
+                        this.onStateChange('NORMALRESULT');
+                        break;
+                    default:
                         break;
                 }
             },
 
             onLaserReady: function() {
-
                 console.log('[LengthManager] laser is ready...');
                 this.laserState = "ON";
                 //TODO  output state to screen
@@ -51,31 +39,10 @@ define(["jquery", "modules/simulator/FuncManager"],
                     case "NORMALRESULT":
                     case "PLUSRESULT":
                     case "MINUSRESULT":
-                        this.updateLengthHistory(this.history);
-                        displayUtil.updateLine4('--.---');
                         this.onStateChange('NORMAL');
                         break;
-                    case "PLUS":
-                        //TODO 
-                        this.history = [null,this.data, null];
-                        this.updateLengthHistory(this.history);
-                        displayUtil.updateLine4('--.---');
-                        break;
-                    case "MINUS":
-                        //TODO 
-                        this.history = [null,this.data, null];
-                        this.updateLengthHistory(this.history);
-                        displayUtil.updateLine4('--.---');
-                        break;
-                    case "NORMAL":
-                        if (this.data) {
-                            this.history.unshift(this.data);
-                            this.history.pop();
-                        }
-                        this.updateLengthHistory(this.history);
-                        displayUtil.updateLine4('--.---');
-                        this.onStateChange('NORMAL');
-                        break;
+                    default:
+                    break;
                 }
             },
 
@@ -91,46 +58,32 @@ define(["jquery", "modules/simulator/FuncManager"],
 
                 if (this.laserState === 'ON') {
                     this.trigger('turnOffLaser');
-                    if (this.state === "NORMAL") this.onStateChange('NORMALRESULT');
                 } else {
                     switch (this.state) {
                         case "PLUS":
                         case "MINUS":
                             this.history = [null, null, null];
                             this.data = 0.0;
-                            displayUtil.updateLine4('--.---');
                             this.onStateChange('NORMAL');
                             break;
                         case "PLUSRESULT":
-                            this.history = [null, this.history[2], null];
-                            this.data = 0.0;
-                            displayUtil.updateLine2(this.history[2]);
-                            displayUtil.updateLine3('--.---');
-                            displayUtil.updateLine4('--.---');
+                            this.data = this.history[0];
                             this.onStateChange('PLUS');
                             break;
                         case "MINUSRESULT":
-                            this.history = [null, this.history[2], null];
-                            this.data = 0.0;
-                            displayUtil.updateLine2(this.history[2]);
-                            displayUtil.updateLine3('--.---');
-                            displayUtil.updateLine4('--.---');
+                            this.data = this.history[0];
                             this.onStateChange('MINUS');
                             break;
                         case "NORMAL":
+                            break;
                         case "NORMALRESULT":
-                            this.data = this.history.shift();
-                            this.history.push(null);
-                            if (this.data) {
-                                displayUtil.updateLine4(this.data);
-                            } else {
-                                this.data = 0.0;
-                                displayUtil.updateLine4('--.---');
-                            }
-
+                            this.data = this.history.pop();
+                            this.history.unshift(null);
+                            this.data = this.history.pop();
+                            this.history.unshift(null);
                             this.onStateChange('NORMAL');
+                            this.onStateChange('NORMALRESULT');
                     }
-                    this.updateLengthHistory(this.history);
                 }
             },
             onHistory: function() {
@@ -143,16 +96,51 @@ define(["jquery", "modules/simulator/FuncManager"],
                     case "PLUS":
                         //TODO 
                         displayUtil.updateScreenClass('length-state-5');
+                        this.history = [null,this.data, null];
+                        console.log(this.history);
+                        this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4('--.---');
                         break;
                     case "MINUS":
                         //TODO 
                         displayUtil.updateScreenClass('length-state-6');
+                        this.history = [null,this.data, null];
+                        this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4('--.---');
                         break;
                     case "NORMAL":
                         if (historyCount === 0) displayUtil.updateScreenClass('length-state-1');
                         if (historyCount === 1) displayUtil.updateScreenClass('length-state-2');
                         if (historyCount === 2) displayUtil.updateScreenClass('length-state-3');
                         if (historyCount === 3) displayUtil.updateScreenClass('length-state-4');
+                        this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4('--.---');
+                        break;
+                    case "NORMALRESULT":
+                        this.history.push(this.data);
+                        this.history.shift();
+                        displayUtil.updateLine4(this.data);
+                        break;
+
+                    case "PLUSRESULT":
+                        this.history.pop();
+                        this.history.push(this.data);
+                        this.data = this.history[1] + this.history[2];
+                        this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4(this.data);
+
+                        this.history.shift();
+                        this.history.push(this.data);
+                        break;
+                    case "MINUSRESULT":
+                        this.history.pop();
+                        this.history.push(this.data);
+                        this.data = this.history[1] - this.history[2];
+                        this.updateLengthHistory(this.history);
+                        displayUtil.updateLine4(this.data);
+
+                        this.history.shift();
+                        this.history.push(this.data);
                         break;
                 }
 
@@ -170,9 +158,9 @@ define(["jquery", "modules/simulator/FuncManager"],
                 return count;
             },
             updateLengthHistory: function(history) {
-                if (history[0]) displayUtil.updateLine3(history[0]);
-                if (history[1]) displayUtil.updateLine2(history[1]);
-                if (history[2]) displayUtil.updateLine1(history[2]);
+                displayUtil.updateLine1(history[0]);
+                displayUtil.updateLine2(history[1]);
+                displayUtil.updateLine3(history[2]);
             }
 
         });
