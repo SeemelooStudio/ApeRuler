@@ -55,6 +55,7 @@ define(["jquery", "modules/simulator/FuncManager"],
                 this.trigger('turnOnLaser');
             },
             onPower: function() {
+                var historyCount = 0;
                 if (this.laserState === 'ON') {
                     this.trigger('turnOffLaser');
 
@@ -77,16 +78,24 @@ define(["jquery", "modules/simulator/FuncManager"],
                         case "NORMAL":
                             this.data = this.history.pop();
                             this.history.unshift(null);
-                            this.onStateChange('NORMAL');
+                            historyCount = this.getHistoryCount(this.history);
+                            if (historyCount === 0) displayUtil.updateScreenClass('length-state-1');
+                            if (historyCount === 1) displayUtil.updateScreenClass('length-state-2');
+                            if (historyCount === 2) displayUtil.updateScreenClass('length-state-3');
+                            if (historyCount === 3) displayUtil.updateScreenClass('length-state-4');
+                            this.updateLengthHistory(this.history);
                             this.onStateChange('NORMALRESULT');
                             break;
                         case "NORMALRESULT":
                             this.data = this.history.pop();
                             this.history.unshift(null);
-                            this.data = this.history.pop();
-                            this.history.unshift(null);
-                            this.onStateChange('NORMAL');
-                            this.onStateChange('NORMALRESULT');
+                            historyCount = this.getHistoryCount(this.history);
+                            if (historyCount === 0) displayUtil.updateScreenClass('length-state-1');
+                            if (historyCount === 1) displayUtil.updateScreenClass('length-state-2');
+                            if (historyCount === 2) displayUtil.updateScreenClass('length-state-3');
+                            if (historyCount === 3) displayUtil.updateScreenClass('length-state-4');
+                            this.updateLengthHistory(this.history);
+                            displayUtil.updateLine4(this.data);
                     }
                 }
 
@@ -95,7 +104,7 @@ define(["jquery", "modules/simulator/FuncManager"],
 
             },
             onStateChange: function(targetState) {
-                var historyCount = this.getHistoryCount(this.history);
+
                 this.state = targetState;
                 switch (targetState) {
                     case "PLUS":
@@ -114,6 +123,11 @@ define(["jquery", "modules/simulator/FuncManager"],
                         displayUtil.updateLine4('--.---');
                         break;
                     case "NORMAL":
+                        if (this.data) {
+                            this.history.push(this.data);
+                            this.history.shift();
+                        }
+                        var historyCount = this.getHistoryCount(this.history);
                         if (historyCount === 0) displayUtil.updateScreenClass('length-state-1');
                         if (historyCount === 1) displayUtil.updateScreenClass('length-state-2');
                         if (historyCount === 2) displayUtil.updateScreenClass('length-state-3');
@@ -122,8 +136,6 @@ define(["jquery", "modules/simulator/FuncManager"],
                         displayUtil.updateLine4('--.---');
                         break;
                     case "NORMALRESULT":
-                        this.history.push(this.data);
-                        this.history.shift();
                         displayUtil.updateLine4(this.data);
                         break;
 
