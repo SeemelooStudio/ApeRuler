@@ -42,7 +42,7 @@ define(["jquery", "modules/simulator/FuncManager"],
                         this.onStateChange('NORMAL');
                         break;
                     default:
-                    break;
+                        break;
                 }
             },
 
@@ -55,9 +55,9 @@ define(["jquery", "modules/simulator/FuncManager"],
                 this.trigger('turnOnLaser');
             },
             onPower: function() {
-
                 if (this.laserState === 'ON') {
                     this.trigger('turnOffLaser');
+
                 } else {
                     switch (this.state) {
                         case "PLUS":
@@ -75,6 +75,10 @@ define(["jquery", "modules/simulator/FuncManager"],
                             this.onStateChange('MINUS');
                             break;
                         case "NORMAL":
+                            this.data = this.history.pop();
+                            this.history.unshift(null);
+                            this.onStateChange('NORMAL');
+                            this.onStateChange('NORMALRESULT');
                             break;
                         case "NORMALRESULT":
                             this.data = this.history.pop();
@@ -85,6 +89,7 @@ define(["jquery", "modules/simulator/FuncManager"],
                             this.onStateChange('NORMALRESULT');
                     }
                 }
+
             },
             onHistory: function() {
 
@@ -96,7 +101,7 @@ define(["jquery", "modules/simulator/FuncManager"],
                     case "PLUS":
                         //TODO 
                         displayUtil.updateScreenClass('length-state-5');
-                        this.history = [null,this.data, null];
+                        this.history = [null, this.data, null];
                         console.log(this.history);
                         this.updateLengthHistory(this.history);
                         displayUtil.updateLine4('--.---');
@@ -104,7 +109,7 @@ define(["jquery", "modules/simulator/FuncManager"],
                     case "MINUS":
                         //TODO 
                         displayUtil.updateScreenClass('length-state-6');
-                        this.history = [null,this.data, null];
+                        this.history = [null, this.data, null];
                         this.updateLengthHistory(this.history);
                         displayUtil.updateLine4('--.---');
                         break;

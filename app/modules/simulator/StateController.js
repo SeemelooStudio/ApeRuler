@@ -38,7 +38,6 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                         this.funcManager.onMinus();
                         break;
                     case "POWER":
-                        this.turnOffLaser();
                         this.funcManager.onPower();
                         break;
                     default:
@@ -99,6 +98,7 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
             },
             afterStateChange: function() {
                 this.listenTo(this.funcManager, 'turnOnLaser', this.turnOnLaser);
+                this.listenTo(this.funcManager, 'turnOffLaser', this.turnOffLaser);
                 this.listenTo(this.funcManager, 'exit', this.exitCurrentState);
                 if(this.funcManager){
                     this.funcManager.onEnter();
