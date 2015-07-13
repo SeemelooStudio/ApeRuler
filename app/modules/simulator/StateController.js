@@ -48,8 +48,9 @@ define(["jquery", "backbone", "modules/simulator/LengthManager","modules/simulat
                 }
             },
             onStateChange: function(targetState) {
-
-                this.funcManager.onExit();
+                if(this.funcManager){
+                    this.funcManager.onExit();
+                }
                 this.state = targetState;
                 this.funcManager = this.managers[this.state];
                 this.funcManager.onEnter();
